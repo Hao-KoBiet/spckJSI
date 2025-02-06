@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../css/signup.css" />
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/?size=100&id=R0EFIzlnDZTW&format=png&color=000000"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+  </head>
+  <body>
+    <a href="../index.html">
+      <button class="back">
+        <i class="arrow_back">Back</i>
+      </button>
+    </a>
+    <div class="signup-container">
+      <form class="signup-form">
+        <h2>Sign Up</h2>
+        <div class="input-group">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name_user"
+            name="name"
+            placeholder="Full Name"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email_user"
+            name="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password_user"
+            name="password"
+            minlength="6"
+            maxlength="16"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="confirm-password">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirm_user"
+            name="confirm-password"
+            minlength="6"
+            maxlength="16"
+            placeholder="Confirm Password"
+            required
+          />
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="policy" required />
+            <label for="policy">I have read and agree to the <a href="./policy.html">terms and conditions</a>.</label>
+          </div>
+        <button type="submit" class="signup-btn" id="signup-btn">Sign Up</button>
+        <div class="form-footer">
+          <p style="color: gray;">Already have an account? <a href="./login.html" style="color: white;">Log in</a></p>
+        </div>
+      </form>
+    </div>
+
+    <script src="../js/login-signup.js"></script>
+  </body>
+</html>

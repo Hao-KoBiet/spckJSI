@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bảng xếp hạng tiền điện tử</title>
+    <link rel="stylesheet" href="../css/currency.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/?size=100&id=R0EFIzlnDZTW&format=png&color=000000"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
+      <div class="container-fluid">
+          <img src="https://img.icons8.com/?size=40&id=13132&format=png&color=000000" alt="Crypto Icon">
+          <a class="navbar-brand" href="../index.html">Crypto Info</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav" style="gap: 15px">
+                  <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="./currency.html">Cryptocurrencies</a></li>
+                  <li class="nav-item"><a class="nav-link" href="./trending.html">Trending</a></li>
+                  <li class="nav-item"><a class="nav-link" href="./learncrypto.html">Learn</a></li>
+              </ul>
+          </div>
+          <div id="login-container">
+              <button class="btn-login" id="login-page">Login</button>
+          </div>
+      </div>
+  </nav>
+
+    <div style="padding: 30px; padding-top: 25px">
+      <h1>Giá tiền điện tử theo vốn hóa thị trường</h1>
+      <table id="cryptoTable" style="padding: 50px">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tên</th>
+            <th>Hình</th>
+            <th>Giá</th>
+            <th>Vốn Hóa Thị trường</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="pagination">
+        <button id="prevBtn" onclick="changePage(-1)">Previous</button>
+        <p id="currentPage"></p>
+        <button id="nextBtn" onclick="changePage(1)">Next</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/login-signup.js"></script>
+    <script>
+      let cryptoData = [];
+      let currentPage = 1;
+      const itemsPerPage = 10;
+      let pageRN = document.getElementById("currentPage");
+
+      async function fetchCryptoData() {
+        const url =
+          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc";
+
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error("Lỗi khi lấy dữ liệu từ API");
+          }
+          cryptoData = await response.json();
+          renderTable();
+          updatePaginationButtons();
+        } catch (error) {
+          console.error("Lỗi:", error);
+          alert("Có lỗi xảy ra khi lấy dữ liệu");
+        }
+      }
+
+      function renderTable() {
+        const tableBody = document.querySelector("#cryptoTable tbody");
+        tableBody.innerHTML = ""; // Xóa dữ liệu cũ
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const dataToRender = cryptoData.slice(startIndex, endIndex);
+
+        dataToRender.forEach((crypto, index) => {
+          const row = document.createElement("tr");
+          let symb= crypto.symbol.toUpperCase()
+          row.innerHTML = ` 
+                    <td>${startIndex + index + 1}</td>
+                    <td>${crypto.name} <span style="color: gray;">${symb}</span></td>
+                    <td><img src="${crypto.image}" alt="cryto-image" style = "height: 16px; width: 16px;"  /></td>
+                    <td>${crypto.current_price.toFixed(2)} USD</td>
+                    <td>${crypto.market_cap.toLocaleString()} USD</td>
+                `;
+          tableBody.appendChild(row);
+        });
+
+        pageRN.innerHTML = `Page ${currentPage}`;
+      }
+
+      function changePage(direction) {
+        const totalPages = Math.ceil(cryptoData.length / itemsPerPage);
+        currentPage += direction;
+
+        if (currentPage < 1) {
+          currentPage = 1;
+        } else if (currentPage > totalPages) {
+          currentPage = totalPages;
+        }
+
+        renderTable();
+        updatePaginationButtons();
+      }
+
+      function updatePaginationButtons() {
+        const totalPages = Math.ceil(cryptoData.length / itemsPerPage);
+
+        document.getElementById("prevBtn").disabled = currentPage === 1;
+        document.getElementById("nextBtn").disabled =
+          currentPage === totalPages;
+      }
+
+      fetchCryptoData();
+    </script>
+  </body>
+</html>

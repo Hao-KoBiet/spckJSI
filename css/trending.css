@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    font-family: "Arial", sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  #navbar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #f8c16f; /* Màu vàng nhạt */
+    color: #ffffff;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(108, 68, 68, 0.1);
+  }
+  
+  #navbar ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+  }
+  
+  #navbar ul .nav-item {
+    margin: 0 15px;
+  }
+  
+  #navbar ul .nav-item a {
+    color: #000000;
+    padding: 8px 16px;
+    display: block;
+    text-decoration: none;
+  }
+  
+  #navbar ul .nav-item a:hover {
+    background-color: #e1a61f; /* Màu vàng đậm khi hover */
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  #login-container {
+    margin-left: auto;
+    margin-right: 0;
+    padding-right: 20px;
+  }
+  
+  .btn-login {
+    background-color: #f8c16f; /* Màu vàng cho nút đăng nhập */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-login:hover {
+    background-color: #e1a61f; /* Màu vàng đậm khi hover */
+  }
+  
+  /* Navbar style */
+  .navbar {
+    background-color: #fff; /* Màu trắng cho navbar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar a {
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 15px;
+    text-decoration: none;
+  }
+  
+  .navbar a:hover {
+    color: #f8c16f; /* Màu vàng khi hover */
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #f8c16f; /* Màu vàng cho icon toggle */
+  }
+  
+
+  /* Bảng */
+  #cryptoTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #cryptoTable th {
+    background-color: #f8c16f; /* Màu vàng cho header */
+    color: #ffffff;
+    text-align: left;
+    padding: 12px 15px;
+    font-weight: bold;
+    font-size: 16px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  #cryptoTable td {
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  #cryptoTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  #cryptoTable tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  #cryptoTable tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+  }
+  
+  #cryptoTable th, #cryptoTable td {
+    border: 1px solid #ddd;
+  }
+  
