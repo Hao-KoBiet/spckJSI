@@ -41,6 +41,7 @@ body {
 #navbar ul .nav-item a {
     color: #000000;
     padding: 8px 16px;
+    text-decoration: none;
     display: block;
 }
 
