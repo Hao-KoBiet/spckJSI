@@ -57,20 +57,19 @@
 
 
     <div style="padding: 30px; padding-top: 25px">
-      <h1>Giá tiền điện tử theo vốn hóa thị trường</h1>
+      <h1>Cryptocurrency Prices by Market Cap</h1>
       <table id="cryptoTable" style="padding: 50px">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Tên</th>
-            <th>Hình</th>
-            <th>Giá</th>
-            <th>Vốn Hóa Thị trường</th>
+            <th style="width: max-content;">#</th>
+            <th style="width: 30%;;">Coin</th>
+            <th style="width: 30%;">Price</th>
+            <th style="width: auto;">Market Cap</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
-      <div class="pagination">
+      <div class="pagination" style="justify-content: center;">
         <button id="prevBtn" onclick="changePage(-1)">Previous</button>
         <p id="currentPage"></p>
         <button id="nextBtn" onclick="changePage(1)">Next</button>
@@ -115,8 +114,7 @@
           let symb= crypto.symbol.toUpperCase()
           row.innerHTML = ` 
                     <td>${startIndex + index + 1}</td>
-                    <td>${crypto.name} <span style="color: gray;">${symb}</span></td>
-                    <td><img src="${crypto.image}" alt="cryto-image" style = "height: 16px; width: 16px;"  /></td>
+                    <td style="display:flex; gap: 15px;"><span><img src="${crypto.image}" alt="cryto-image" style = "height: 30px; width: 30px;"</span><span>${crypto.name}</span> <span style="color: gray;">${symb}</span></td>
                     <td>${crypto.current_price.toFixed(2)} USD</td>
                     <td>${crypto.market_cap.toLocaleString()} USD</td>
                 `;

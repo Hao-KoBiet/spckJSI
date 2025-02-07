@@ -12,6 +12,7 @@ body {
     width: auto;
 }
 
+/* Navbar style */
 #navbar {
     position: -webkit-sticky;
     position: sticky;
@@ -21,44 +22,44 @@ body {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    background-color: #F8F9FA;
+    background-color: #F8F9FA; /* Màu vàng nhạt */
     color: #ffffff;
     padding: 10px 0;
     box-shadow: 0 2px 4px rgba(108, 68, 68, 0.1);
-}
-
-#navbar ul {
+  }
+  
+  #navbar ul {
     margin: 0;
     list-style: none;
     padding: 0;
     display: flex;
-}
-
-#navbar ul .nav-item {
+  }
+  
+  #navbar ul .nav-item {
     margin: 0 15px;
-}
-
-#navbar ul .nav-item a {
+  }
+  
+  #navbar ul .nav-item a {
     color: #000000;
     padding: 8px 16px;
-    text-decoration: none;
     display: block;
-}
-
-#navbar ul .nav-item a:hover {
+    text-decoration: none;
+  }
+  
+  #navbar ul .nav-item a:hover {
     background-color: #e1a61f; /* Màu vàng đậm khi hover */
     border-radius: 10px;
     transition: 0.3s ease-in-out;
-}
-
-#login-container {
+  }
+  
+  #login-container {
     margin-left: auto;
     margin-right: 0;
     padding-right: 20px;
   }
   
   .btn-login {
-    background-color: #f8c16f;
+    background-color: #f8c16f; /* Màu vàng cho nút đăng nhập */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -69,12 +70,12 @@ body {
   }
   
   .btn-login:hover {
-    background-color: #e1a61f;
+    background-color: #e1a61f; /* Màu vàng đậm khi hover */
   }
   
-  /* Hiệu ứng cho navbar */
+  /* Navbar style */
   .navbar {
-    background-color: #fff;
+    background-color: #fff; /* Màu trắng cho navbar */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
@@ -83,16 +84,16 @@ body {
     font-size: 16px;
     font-weight: bold;
     margin-right: 15px;
+    text-decoration: none;
   }
   
   .navbar a:hover {
-    color: #f8c16f;
+    color: #f8c16f; /* Màu vàng khi hover */
   }
   
   .navbar-toggler-icon {
-    background-color: #f8c16f;
+    background-color: #f8c16f; /* Màu vàng cho icon toggle */
   }
-
 /* Input và nút tìm kiếm */
 .findCoin {
     display: flex;

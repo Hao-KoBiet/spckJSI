@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Top Trending Cryptocurrencies</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="../css/trending.css" />
     <link
       rel="shortcut icon"
@@ -47,14 +50,12 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav" style="width: 100%;">
+          <ul class="navbar-nav" style="width: 100%">
             <li class="nav-item">
               <a class="nav-link" href="../index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./currency.html"
-                >Cryptocurrencies</a
-              >
+              <a class="nav-link" href="./currency.html">Cryptocurrencies</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./trending.html">Trending</a>
@@ -75,10 +76,12 @@
       <table id="cryptoTable">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Coin</th>
-            <th>Symbol</th>
-            <th>Market Cap Rank</th>
+            <th style="width: max-content">#</th>
+            <th style="width: 20%">Coin</th>
+            <th style="width: 15%">Price</th>
+            <th style="width: 15%">24h Volume</th>
+            <th style="width: 15%">Market Cap</th>
+            <th style="width: auto">Market Cap Rank</th>
           </tr>
         </thead>
         <tbody>
@@ -86,7 +89,7 @@
         </tbody>
       </table>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/login-signup.js"></script>
     <script>
@@ -106,18 +109,33 @@
         }
       }
 
-      function renderTable(coins, nfts, categories) {
+      function renderTable(coins) {
         const tableBody = document.querySelector("#cryptoTable tbody");
-        tableBody.innerHTML = ""; 
+        tableBody.innerHTML = "";
 
         coins.forEach((coin, index) => {
+          const { item } = coin;
+          const price = item.data?.price.toFixed(2) + " USD"|| "N/A"; // Giá theo BTC (hoặc N/A nếu không có)
+          const totalVolume = item.total_volume || "N/A";
+          const marketCap = item.market_cap || "N/A";
+          const marketRank = item.market_cap_rank || "N/A";
+
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${coin.item.name}</td>
-            <td>${coin.item.symbol.toUpperCase()}</td>
-            <td>${coin.item.market_cap_rank || "N/A"}</td>
-          `;
+      <td>${index + 1}</td>
+      <td style="display: flex; align-items: center; gap: 10px;">
+        <img src="${
+          item.large
+        }" alt="crypto-image" style="height: 30px; width: 30px;">
+        <span>${
+          item.name
+        }</span> <span style="color: gray;">(${item.symbol.toUpperCase()})</span>
+      </td>
+      <td>${price}</td>
+      <td>${totalVolume} USD</td>
+      <td>${marketCap} USD</td>
+      <td>${marketRank}</td>
+    `;
           tableBody.appendChild(row);
         });
       }
