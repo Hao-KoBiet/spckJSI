@@ -30,12 +30,13 @@ body {
 }
 
 #navbar ul .nav-item {
-    margin: 0 15px;
+    margin: 0 0;
 }
 
 #navbar ul .nav-item a {
     color: #000000;
     padding: 8px 16px;
+    text-decoration: none;
     display: block;
 }
 
@@ -75,6 +76,7 @@ body {
   .navbar a {
     color: #333;
     font-size: 16px;
+    text-decoration: none;
     font-weight: bold;
     margin-right: 15px;
   }
@@ -166,6 +168,7 @@ body {
 
 .card:hover {
     transform: translateY(-10px);
+    cursor: pointer;
 }
 
 .card-title {
