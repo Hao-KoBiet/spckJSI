@@ -37,9 +37,7 @@
               <a class="nav-link" href="../index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./currency.html"
-                >Cryptocurrencies</a
-              >
+              <a class="nav-link" href="./currency.html">Cryptocurrencies</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./trending.html">Trending</a>
@@ -56,80 +54,85 @@
     </nav>
 
     <div class="findCoin" style="margin-top: 25px">
-      <input
-        type="text"
-        name=""
-        id="coinInput"
-        placeholder="Type a name of crypto..."
-      />
+      <input style="width: 25%;" type="text" id="coinInput" placeholder="Type a name of crypto/exchanges..." />
       <button onclick="learnIt()" id="findBtn">Find</button>
     </div>
 
-    <div class="all" style="padding: 30px; width: auto">
-      <h1 style="font-weight: bold" id="nameOfCrypto"></h1>
+    <div class="all" style="padding: 30px; width: auto; display: none;">
+      <h1 id="nameOfCrypto" style="font-weight: bold"></h1>
       <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-        <img id="imageOfCrypto" src="" alt="" />
+        <img id="imageOfCrypto" src="" alt="" style="height: 300px; width: 300px;" />
         <p id="descOfCrypto" style="max-width: 75%; text-align: justify;"></p>
       </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/login-signup.js"></script>
     <script>
+      function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+      }
+
+      function updateUI(titleText, nameText, descText, imgSrc) {
+        document.getElementById("tittle").innerHTML = `Learn About ${titleText}`;
+        document.getElementById("nameOfCrypto").innerHTML = nameText;
+        document.getElementById("descOfCrypto").innerHTML = descText;
+        document.getElementById("imageOfCrypto").src = imgSrc || "https://via.placeholder.com/300";
+        document.querySelector(".all").style.display = "block";
+      }
+
       function learnIt() {
-        let cryptoName = document.getElementById("coinInput").value.trim(); // Loại bỏ khoảng trắng thừa
-
-        // Các phần tử DOM
-        const title = document.getElementById("tittle");
-        const nameOfCrypto = document.getElementById("nameOfCrypto");
-        const imageOfCrypto = document.getElementById("imageOfCrypto");
-        const descOfCrypto = document.getElementById("descOfCrypto");
-        const all = document.getElementsByClassName("all");
-
-        // Cập nhật tiêu đề
-        title.innerHTML = `Learn About ${cryptoName}`;
-        nameOfCrypto.innerHTML = `Information About ${capitalizeFirstLetter(
-          cryptoName
-        )}`;
-
-        function capitalizeFirstLetter(string) {
-          return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        let cryptoName = document.getElementById("coinInput").value.trim().toLowerCase();
+        if (!cryptoName) {
+          alert("Please enter a cryptocurrency name!");
+          return;
         }
 
-        // URL API
-        let url = `https://api.coingecko.com/api/v3/coins/${cryptoName.toLowerCase()}`;
-
-        // Gửi yêu cầu đến API
+        let url = `https://api.coingecko.com/api/v3/coins/${cryptoName}`;
+        
         fetch(url)
-          .then((response) => {
+          .then(response => {
             if (!response.ok) {
-              throw new Error("Coin not found!"); // Xử lý lỗi nếu không tìm thấy đồng tiền
+              return learnExchanges(cryptoName);
             }
-            return response.json(); // Chuyển phản hồi thành JSON
+            return response.json();
           })
-          .then((data) => {
-            // Lấy mô tả về đồng tiền
-            let description =
-              data.description.en || "No description available.";
-            descOfCrypto.innerHTML = description;
-
-            // Xóa gạch chân cho các liên kết <a> nếu có
-            let links = descOfCrypto.querySelectorAll("a");
-            links.forEach((link) => {
-              link.style.textDecoration = "none"; // Xóa gạch chân
-            });
-
-            // Cập nhật hình ảnh
-            let imgSource = data.image.large;
-            imageOfCrypto.src = imgSource;
-            imageOfCrypto.style.maxHeight = "300px"; // Đặt chiều cao tối đa
-            imageOfCrypto.style.maxWidth = "100%"; // Đặt chiều rộng tối đa
-
-            // Hiển thị phần tử "all"
-            Array.from(all).forEach((el) => (el.style.display = "block"));
+          .then(data => {
+            if (!data) return;
+            let description = data.description?.en || "No description available.";
+            updateUI(
+              capitalizeFirstLetter(cryptoName),
+              `Information About ${capitalizeFirstLetter(cryptoName)}`,
+              description,
+              data.image?.large
+            );
           })
-          .catch((error) => {
+          .catch(error => {
             console.error("Error fetching data:", error);
             alert("Coin not found or API error. Please try again.");
+          });
+      }
+
+      function learnExchanges(cryptoName) {
+        let url = `https://api.coingecko.com/api/v3/exchanges/${cryptoName}`;
+        
+        fetch(url)
+          .then(response => {
+            if (!response.ok) throw new Error("Exchange not found!");
+            return response.json();
+          })
+          .then(data => {
+            let description = data.description || "No description available.";
+            updateUI(
+              capitalizeFirstLetter(cryptoName),
+              `Exchange Information: ${capitalizeFirstLetter(cryptoName)}`,
+              description,
+              data.image
+            );
+          })
+          .catch(error => {
+            console.error("Error fetching exchange data:", error);
+            alert("No crypto or exchange found. Please try again.");
           });
       }
     </script>
