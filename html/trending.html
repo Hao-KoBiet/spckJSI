@@ -119,25 +119,25 @@
         coins.forEach((coin, index) => {
           const { item } = coin;
           const price = item.data?.price.toFixed(2) + " USD"|| "N/A"; // Giá theo BTC (hoặc N/A nếu không có)
-          const totalVolume = item.total_volume || "N/A";
-          const marketCap = item.market_cap || "N/A";
+          const totalVolume = item.data?.total_volume || "N/A";
+          const marketCap = item.data?.market_cap || "N/A";
           const marketRank = item.market_cap_rank || "N/A";
 
           const row = document.createElement("tr");
           row.innerHTML = `
-      <td>${index + 1}</td>
+      <td style="font-size: 16px;">${index + 1}</td>
       <td style="display: flex; align-items: center; gap: 10px;">
         <img src="${
           item.large
         }" alt="crypto-image" style="height: 30px; width: 30px;">
-        <span>${
+        <span style="font-size: 16px;">${
           item.name
         }</span> <span style="color: gray;">(${item.symbol.toUpperCase()})</span>
       </td>
-      <td>${price}</td>
-      <td>${totalVolume} USD</td>
-      <td>${marketCap} USD</td>
-      <td>${marketRank}</td>
+      <td style="font-size: 16px;">${price}</td>
+      <td style="font-size: 16px;">${totalVolume} USD</td>
+      <td style="font-size: 16px;">${marketCap} USD</td>
+      <td style="font-size: 16px;">${marketRank}</td>
     `;
           tableBody.appendChild(row);
         });

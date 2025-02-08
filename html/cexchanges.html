@@ -119,13 +119,13 @@
         dataToRender.forEach((exchange, index) => {
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td>${startIndex + index + 1}</td>
+            <td style="font-size: 16px;">${startIndex + index + 1}</td>
             <td style="display: flex; align-items: center; gap: 10px;">
               <img src="${exchange.image}" alt="exchange-logo" style="height: 30px; width: 30px;"/>
-              <span>${exchange.name}</span>
+              <span style="font-size: 16px;">${exchange.name}</span>
             </td>
-            <td>${exchange.trust_score + " / 10"|| "N/A"}</td>
-            <td>${exchange.trade_volume_24h_btc.toFixed(2)} BTC</td>
+            <td style="font-size: 16px;">${exchange.trust_score + " / 10"|| "N/A"}</td>
+            <td style="font-size: 16px;">${exchange.trade_volume_24h_btc.toFixed(2)} BTC</td>
           `;
           tableBody.appendChild(row);
         });

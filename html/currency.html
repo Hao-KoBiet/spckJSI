@@ -116,10 +116,10 @@
           const row = document.createElement("tr");
           let symb= crypto.symbol.toUpperCase()
           row.innerHTML = ` 
-                    <td>${startIndex + index + 1}</td>
-                    <td style="display:flex; gap: 15px;"><span><img src="${crypto.image}" alt="cryto-image" style = "height: 30px; width: 30px;"</span><span>${crypto.name}</span> <span style="color: gray;">${symb}</span></td>
-                    <td>${crypto.current_price.toFixed(2)} USD</td>
-                    <td>${crypto.market_cap.toLocaleString()} USD</td>
+                    <td style="font-size: 16px;">${startIndex + index + 1}</td>
+                    <td style="display:flex; gap: 15px; font-size: 16px"><span><img src="${crypto.image}" alt="cryto-image" style = "height: 30px; width: 30px;"</span><span>${crypto.name}</span> <span style="color: gray;">${symb}</span></td>
+                    <td style="font-size: 16px;">${crypto.current_price.toFixed(2)} USD</td>
+                    <td style="font-size: 16px;">${crypto.market_cap.toLocaleString()} USD</td>
                 `;
           tableBody.appendChild(row);
         });
