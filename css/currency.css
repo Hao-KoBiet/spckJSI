@@ -40,7 +40,7 @@ body {
   }
   
   #navbar ul .nav-item a:hover {
-    background-color: #e1a61f; /* Màu vàng đậm khi hover */
+    color: #e1a61f; /* Màu vàng đậm khi hover */
     border-radius: 10px;
     transition: 0.3s ease-in-out;
   }
