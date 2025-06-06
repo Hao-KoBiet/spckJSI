@@ -13,8 +13,9 @@ if (!userListLocalStorage) {
 if (loginButton) {
   loginButton.onclick = function (e) {
     e.preventDefault();
-    var userEmail = document.getElementById("email_user");
-    var userPassword = document.getElementById("password_user");
+    // Sửa lại lấy đúng id của input
+    var userEmail = document.getElementById("email");
+    var userPassword = document.getElementById("password");
     const currentUser = userListLocalStorage.filter(
       (user) => user.userEmail === userEmail.value
     )[0];
@@ -45,10 +46,10 @@ if (loginButton) {
   signupButton.onclick = function (e) {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    var userEmail = document.getElementById("email_user");
-    var userPassword = document.getElementById("password_user");
-    var userName = document.getElementById("name_user");
-    var userConfirmPW = document.getElementById("confirm_user");
+    var userEmail = document.getElementById("email-user");
+    var userPassword = document.getElementById("password-user");
+    var userName = document.getElementById("name-user");
+    var userConfirmPW = document.getElementById("confirm-user");
     if (
       !userEmail.value ||
       !userPassword.value ||

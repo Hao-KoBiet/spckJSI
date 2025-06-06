@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
-    background-image: url(https://th.bing.com/th/id/R.eb5afb2df67544fa9cfe89de83c28c64?rik=7T2AHqQM0bDOzA&pid=ImgRaw&r=0);
+    background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20230623/pngtree-grocery-items-in-3d-view-image_3658101.jpg);
     background-size: cover;
     background-position: center;
     display: flex;
@@ -15,7 +15,7 @@ body {
     padding: 30px;
     border-radius: 10px;
     width: 320px;
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(25px);
 }
 
 .login-form {
@@ -53,7 +53,7 @@ body {
 .checkbox-group {
     display: flex;
     align-items: center;
-    margin-bottom: 15px
+    margin-bottom: 15px;
 }
 
 .checkbox-group input {
@@ -66,7 +66,7 @@ body {
 }
 
 .login-btn {
-    background-color: #f6ff00;
+    background-color: #27830a;
     color: #fff;
     padding: 10px;
     border: none;
@@ -77,7 +77,25 @@ body {
 }
 
 .login-btn:hover {
-    background-color: #e4d502;
+    background-color: #014e01;
+}
+
+#google-login-btn {
+    background-color: #fff;
+    color: #444;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#google-login-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
 }
 
 .form-footer {

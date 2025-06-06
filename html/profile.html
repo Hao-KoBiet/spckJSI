@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container" style="margin-left: 25px;">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav w-100" style="display: flex; list-style: none; align-items: center;">
+                    <li><a class="navbar-brand" href="../index.html">SHOPPINGX</a></li>
+                    <li class="nav-item ms-5" style="margin-left: 50px;"><button class="nav-btn" onclick="location.href='../index.html'">Trang chủ</button></li>
+                    <li class="nav-item ms-5"><button class="nav-btn" onclick="location.href='./shop.html'">Cửa hàng</button></li>
+                    <li class="nav-item ms-3"><button class="nav-btn" onclick="location.href='./cart.html'">Giỏ hàng</button></li>
+                    <li class="nav-item ms-auto" style="margin-left: auto;">
+                        <form id="searchForm" class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+                            <button class="btn btn-outline-light" type="submit">Tìm</button>
+                        </form>
+                    </li>
+                    <li class="nav-item ms-auto">
+                        <button class="nav-btn logout-button" id="logout-button" onclick="logout()">Đăng xuất</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="profile-container">
+        <div class="profile-info">
+            <img class="profile-avatar" src="https://sanctuarypocatello.com/wp-content/uploads/2023/09/blank-profile-300x300.png" alt="Avatar">
+            <div class="profile-details">
+                <div class="profile-name" id="profile-name">Tên người dùng</div>
+                <div class="profile-email" id="profile-email">email@gmail.com</div>
+                <div class="profile-address" id="profile-address">Địa chỉ: <span id="address-display">Chưa cập nhật</span> <button type="button" id="changeAddressBtn">Thay đổi</button></div>
+            </div>
+        </div>
+    </div>
+    </div>
+   
+    
+    <div class="favorites-section">
+        <h2>Sản phẩm yêu thích</h2>
+        <div class="favorites-list" id="favorites-list"></div>
+    </div>
+    <div class="purchased-section">
+        <h2>Sản phẩm đã mua</h2>
+        <div class="purchased-list" id="purchased-list"></div>
+    </div>
+    <script src="URL_ADDRESS.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/profile.js"></script>
+</body>
+</html>

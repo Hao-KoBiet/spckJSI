@@ -1,21 +1,27 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
-    background-image: url(https://th.bing.com/th/id/R.eb5afb2df67544fa9cfe89de83c28c64?rik=7T2AHqQM0bDOzA&pid=ImgRaw&r=0);
+    background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20230623/pngtree-grocery-items-in-3d-view-image_3658101.jpg);
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    padding: 0;
 }
 
 .signup-container {
-    padding: 30px;
+    padding: 24px 16px;
     border-radius: 10px;
-    width: 320px;
+    width: 100%;
+    max-width: 400px;
+    height: 80%;
     backdrop-filter: blur(25px);
+    background: rgba(0,0,0,0.35);
+    box-sizing: border-box;
+    margin: 24px 8px;
 }
 
 .signup-form {
@@ -26,11 +32,12 @@ body {
 .signup-form h2 {
     color: #fff;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    font-size: 1.6rem;
 }
 
 .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 13px;
 }
 
 .input-group label {
@@ -42,16 +49,17 @@ body {
 
 .input-group input {
     width: 100%;
-    padding: 10px;
+    padding: 9px;
     border: none;
     border-radius: 5px;
     background-color: #444;
     color: #fff;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 .signup-btn {
-    background-color: #f6ff00;
+    background-color: #27830a;
     color: #fff;
     padding: 10px;
     border: none;
@@ -59,15 +67,41 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .signup-btn:hover {
-    background-color: #e4d502;
+    background-color: #014e01;
+    color: #fff;
+}
+
+#google-login-btn {
+    background-color: #fff;
+    color: #444;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#google-login-btn:hover {
+    background-color: #e4e4e4;
+    color: #000;
 }
 
 .form-footer {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 16px;
 }
 
 .form-footer a {
@@ -107,7 +141,7 @@ body {
 .checkbox-group {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 13px;
 }
 
 .checkbox-group input {
@@ -128,10 +162,28 @@ body {
     text-decoration: underline;
 }
 
+@media only screen and (max-width: 480px) {
+    .signup-container {
+        max-width: 98vw;
+        padding: 12px 4px;
+        margin: 8px 2px;
+    }
+    .signup-form h2 {
+        font-size: 1.2rem;
+    }
+    .back {
+        font-size: 14px;
+        padding: 7px;
+    }
+}
 
 @media only screen and (max-width: 768px) {
     body {
         font-size: 16px;
+    }
+    .signup-container {
+        max-width: 95vw;
+        margin: 12px 2vw;
     }
     .back {
         left: 5%;

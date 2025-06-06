@@ -1,244 +1,224 @@
-/* ===== General Styles ===== */
-body {
+/* Reset và style chung */
+* {
     margin: 0;
-    font-family: "Arial", sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-}
-
-/* ===== Navbar Styles ===== */
-#navbar {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    background-color: #F8F9FA;
-    color: #ffffff;
-    padding: 10px 0;
-    box-shadow: 0 2px 4px rgba(108, 68, 68, 0.1);
-}
-
-#navbar ul {
-    margin: 0;
-    list-style: none;
     padding: 0;
-    display: flex;
+    box-sizing: border-box;
 }
 
-#navbar ul .nav-item {
-    margin: 0 0;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
 }
 
-#navbar ul .nav-item a {
-    color: #000000;
-    padding: 8px 16px;
+/* Navbar styles */
+.navbar {
+    padding: 0.8rem 0;
+    background-color: #27ae60 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.navbar-brand {
     text-decoration: none;
-    display: block;
-}
-
-#navbar ul .nav-item a:hover {
-    color: #e1a61f; /* Màu vàng đậm khi hover */
-    border-radius: 10px;
-    transition: 0.3s ease-in-out;
-}
-
-#login-container {
-    margin-left: auto;
-    margin-right: 0;
-    padding-right: 20px;
-  }
-  
-  .btn-login {
-    background-color: #f8c16f;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-login:hover {
-    background-color: #e1a61f;
-  }
-  
-  /* Hiệu ứng cho navbar */
-  .navbar {
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .navbar a {
-    color: #333;
-    font-size: 16px;
-    text-decoration: none;
+    font-size: 1.8rem;
     font-weight: bold;
-    margin-right: 15px;
-  }
-  
-  .navbar a:hover {
-    color: #f8c16f;
-  }
-  
-  .navbar-toggler-icon {
-    background-color: #f8c16f;
-  }
+    letter-spacing: 1px;
+    color: #fff !important;
+}
 
+.navbar .btn-link {
+    color: #fff !important;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    transition: color 0.2s;
+}
 
+.navbar .btn-link:hover,
+.navbar .btn-link:focus {
+    color: #27ae60 !important;
+    text-decoration: underline;
+}
 
-/* ===== Hero Section ===== */
-.hero {
-    position: relative;
+#authSection {
+    gap: 0.5rem;
+}
+
+/* Hero section styles */
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+    background: url('https://static-asset.amac.us/wp-content/uploads/2023/11/29152026/Online-Shopping.jpg');
+    background-size: cover;
     height: 80vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     text-align: center;
     color: white;
-    overflow: hidden;
+    position: relative;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url(https://tse2.mm.bing.net/th?id=OIP.6NUiI9HKKXkMINaBlUPh4wHaEK&rs=1&pid=ImgDetMain);
-    background-size: cover;
-    background-position: center;
-    filter: blur(10px);
-    z-index: 1;
-}
-
-.hero .content {
+.hero-section .container {
     position: relative;
     z-index: 2;
 }
 
-.hero h1 {
+.hero-section h1 {
     font-size: 3.5rem;
-    font-weight: bold;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-.hero p {
+.hero-section p {
+    color: #fff;
+    font-size: 1.3rem;
+    margin: 1.5rem 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.hero-section .btn-primary {
+    color: #fff;
+    padding: 1rem 2.5rem;
     font-size: 1.2rem;
-    margin: 20px 0;
-}
-
-.hero .btn {
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: #ffcb05;
-    color: #004d7a;
+    border-radius: 50px;
+    background-color: #27ae60;
+    border: none;
     text-decoration: none;
-    border: none;
-    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
-.hero .btn:hover {
-    background-color: #ffc107;
+.hero-section .btn-primary:hover {
+    background-color: #219150;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* ===== Categories Section ===== */
-#categories {
-    padding: 50px 15px;
-    display: flex;
-    justify-content: space-around;
-}
 
-.popularCoin {
-    padding: 50px 15px;
-    color: #004d7a;
-    font-weight: bold;
-}
-
-.card {
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-    justify-content: space-around;
-} 
-
-.card:hover {
-    transform: translateY(-10px);
-    cursor: pointer;
-}
-
-.card-title {
-    color: #004d7a;
-    font-weight: bold;
-}
-
-.card .img-fluid {
-    height: 30px;
-    margin-left: 50%;
-    transform: translateX(0);
-    transform: translateY(0);
-    width: 30px;
-}
-
-/* ===== Trending Section ===== */
-
-#trending {
-    padding: 50px 15px;
-    background-color: #fff;
-}
-
-#trending h2 {
-    color: #004d7a;
-    margin-bottom: 30px;
-    font-weight: bold;
-}
-
-#trending .img-fluid {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Footer */
+/* Footer styles */
 footer {
-    background-color: #ffffff;
-    color: rgb(217, 217, 217);
-    padding: 20px 0;
-    text-align: center;
-    border: rgb(203, 203, 203) solid 0.5px;
+    background-color: #27ae60;
+    color: #fff;
+    padding: 4rem 0 2rem;
+}
+
+footer h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+footer p {
+    color: rgba(255,255,255,0.8);
+    line-height: 1.8;
 }
 
 footer a {
-    color: #ffcb05;
-    margin: 0 10px;
-    transition: color 0.3s;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
 }
 
 footer a:hover {
-    color: #ffc107;
+    color: #007bff;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-    .hero h1 {
+footer hr {
+    margin: 2rem 0;
+    border-color: rgba(255,255,255,0.1);
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .hero-section h1 {
         font-size: 2.5rem;
     }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .navbar-brand {
-        font-size: 18px;
-    }
-
-
-    .btn-danger {
-        font-size: 14px;
+    .hero-section p {
+        font-size: 1.1rem;
     }
 }
 
+@media (max-width: 768px) {
+    .hero-section {
+        height: 60vh;
+    }
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    .class-card img {
+        height: 150px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section h1 {
+        font-size: 1.3rem;
+    }
+    .hero-section p {
+        font-size: 1rem;
+    }
+    .hero-section .btn-primary {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+}
+
+.nav-btn {
+    background: transparent;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 0.4rem 1.2rem;
+    margin: 0 0.3rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: 
+        background 0.2s,
+        color 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.nav-btn:hover, .nav-btn:focus {
+    background: #fff;
+    color: #1a1e25;
+    border-color: #007bff;
+    box-shadow: 0 2px 8px rgba(0,123,255,0.15);
+    outline: none;
+}
+
+/* Search bar in navbar */
+.navbar .form-control[type="search"] {
+    border-radius: 20px;
+    border: 1.5px solid #27ae60;
+    padding: 6px 16px;
+    font-size: 1em;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fff;
+    color: #222;
+    min-width: 180px;
+}
+.navbar .form-control[type="search"]:focus {
+    border-color: #219150;
+    box-shadow: 0 0 0 2px #b2f2d7;
+    outline: none;
+}
+.navbar .btn.btn-outline-light[type="submit"] {
+    border-radius: 20px;
+    border: 1.5px solid #27ae60;
+    color: #27ae60;
+    background: #fff;
+    font-weight: 500;
+    padding: 6px 18px;
+    margin-left: 6px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.navbar .btn.btn-outline-light[type="submit"]:hover {
+    background: #27ae60;
+    color: #fff;
+    border-color: #219150;
+}

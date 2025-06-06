@@ -16,19 +16,22 @@
     />
   </head>
   <body>
+    <div id="notifyRegister">
+      
+    </div>
     <a href="../index.html">
       <button class="back">
         <i class="arrow_back">Back</i>
       </button>
     </a>
     <div class="signup-container">
-      <form class="signup-form">
+      <form class="signup-form" id="registerForm">
         <h2>Sign Up</h2>
         <div class="input-group">
           <label for="name">Name:</label>
           <input
             type="text"
-            id="name_user"
+            id="name-user"
             name="name"
             placeholder="Full Name"
             required
@@ -38,7 +41,7 @@
           <label for="email">Email:</label>
           <input
             type="email"
-            id="email_user"
+            id="email"
             name="email"
             placeholder="Email"
             required
@@ -48,7 +51,7 @@
           <label for="password">Password:</label>
           <input
             type="password"
-            id="password_user"
+            id="password"
             name="password"
             minlength="6"
             maxlength="16"
@@ -60,7 +63,7 @@
           <label for="confirm-password">Confirm Password:</label>
           <input
             type="password"
-            id="confirm_user"
+            id="confirm-user"
             name="confirm-password"
             minlength="6"
             maxlength="16"
@@ -73,12 +76,16 @@
             <label for="policy">I have read and agree to the <a href="./policy.html">terms and conditions</a>.</label>
           </div>
         <button type="submit" class="signup-btn" id="signup-btn">Sign Up</button>
+        <button onclick="signInWithGoogle()" id="google-login-btn">Đăng nhập với Google</button>
+
         <div class="form-footer">
           <p style="color: gray;">Already have an account? <a href="./login.html" style="color: white;">Log in</a></p>
         </div>
       </form>
     </div>
 
-    <script src="../js/login-signup.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+
+    <!-- <script src="../js/login-signup.js"></script> -->
   </body>
 </html>

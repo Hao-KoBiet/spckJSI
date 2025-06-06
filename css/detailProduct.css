@@ -1,0 +1,226 @@
+.detail-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(39,174,96,0.10);
+    padding: 32px;
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+.detail-img {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.detail-img img {
+    max-width: 320px;
+    max-height: 320px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.detail-info {
+    flex: 2;
+}
+.detail-info h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+.detail-info p {
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+.detail-info .price {
+    color: #e74c3c;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+.action-group {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+.buy-btn, .favorite-btn {
+    width: 160px;
+    margin: 0 auto;
+}
+@media (min-width: 600px) {
+    .action-group {
+        align-items: center;
+    }
+    .buy-btn, .favorite-btn {
+        width: 200px;
+    }
+}
+.buy-btn {
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.buy-btn:hover {
+    background: #219150;
+}
+.favorite-btn {
+    background: #fff;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+.favorite-btn:hover {
+    background: #e74c3c;
+    color: #fff;
+}
+.quantity-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F5F5F5;
+}
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    background: #f3f3f3;
+    border: 1.5px solid #27ae60;
+    color: #27ae60;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.qty-btn:hover {
+    background: #27ae60;
+    color: #fff;
+}
+#quantity {
+    width: 60px;
+    text-align: center;
+    font-size: 1em;
+    padding: 6px 0;
+    margin: 0 2px;
+}
+#quantity:focus {
+    border-color: #219150;
+    box-shadow: 0 0 0 2px #b2f2d7;
+}
+#commentSection {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(39,174,96,0.10);
+    padding: 32px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#commentSection #commentInput {
+    width: 30%;
+    height: 80px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none;
+    font-size: 1em;
+}
+
+#commentSection #commentInput:focus {
+    border-color: #27ae60;
+    box-shadow: 0 0 0 2px #b2f2d7;
+}
+
+#commentSection .commentSubmit {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+#commentSection .commentSubmit:hover {
+    background: #219150;
+}
+
+#commentSection .commentList {
+    margin-top: 20px;
+    padding: 16px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#commentSection .commentList div {
+    margin-bottom: 12px;
+    padding: 8px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+#commentSection .commentList h4 {
+    margin: 0 0 4px;
+    font-size: 1em;
+    color: #555;
+}
+
+#commentSection .commentList p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+#commentsList {
+    margin-top: 20px;
+}
+.commentList {
+    margin-top: 20px;
+    padding: 16px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.commentList div {
+    margin-bottom: 12px;
+    padding: 8px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.commentList h4 {
+    margin: 0 0 4px;
+    font-size: 1em;
+    color: #555;
+}
+
+.commentList p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+#commentsList {
+    margin-top: 20px;
+}

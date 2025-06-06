@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa số lượng sản phẩm</title>
+    <link rel="stylesheet" href="../css/editProduct.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="edit-container">
+        <h2>Chỉnh sửa số lượng sản phẩm trong giỏ</h2>
+        <form id="editForm">
+            <div class="form-group" style="text-align:center;">
+                <img id="productImg" src="" alt="Ảnh sản phẩm" style="max-width:160px;max-height:160px;margin-bottom:12px;border-radius:8px;">
+            </div>
+            <div class="form-group">
+                <label>Tên sản phẩm:</label>
+                <span id="productName"></span>
+            </div>
+            <div class="form-group">
+                <label>Thương hiệu:</label>
+                <span id="productBrand"></span>
+            </div>
+            <div class="form-group">
+                <label>Giá:</label>
+                <span id="productPrice"></span>
+            </div>
+            <div class="form-group">
+                <label>Số lượng:</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+            </div>
+            <div class="form-group" style="margin-top:10px;">
+                <span style="font-weight:600;">Tổng giá:</span>
+                <span id="totalPrice" style="color:#e74c3c;font-weight:600;"></span>
+            </div>
+            <button type="button" class="save-btn" id="saveBtn">Lưu</button>
+            <button type="button" class="cancel-btn" onclick="window.location.href='../html/cart.html'">Quay lại</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/edit.js"></script>
+</body>
+</html>
