@@ -44,7 +44,7 @@
     font-weight: 600;
     color: #222;
 }
-.profile-email,.profile-address {
+.profile-email,.profile-address, .profile-role {
     font-size: 1rem;
     color: #666;
     margin-top: 4px;
@@ -78,7 +78,7 @@
     color: white;
 }
 .favorites-section, .purchased-section {
-  margin: 40px 20px 0 20px;
+  margin: 30px 20px 0 20px;
 }
 .favorites-list, .purchased-list {
   display: flex;

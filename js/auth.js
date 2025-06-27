@@ -3,12 +3,13 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+import { collection, getDocs, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 import { auth, db } from "./config.js";
 
-
+// ====== Đăng ký tài khoản ======
 const register = document.getElementById("registerForm");
 if (register) {
   register.addEventListener("submit", async function (e) {
@@ -25,38 +26,101 @@ if (register) {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      localStorage.setItem("fullName", fullName);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      await addUser(user.uid, fullName, email);
       alert("Đăng ký thành công! Vui lòng đăng nhập.");
       location.href = "login.html";
     } catch (error) {
-      if (notifyRegister) notifyRegister.innerHTML = `<p class="text-danger">${error.message}</p>`;
+      alert(error.message);
     }
   });
 }
 
+// ====== Đăng nhập tài khoản ======
 const login = document.getElementById("loginForm");
 if (login) {
   login.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      localStorage.setItem("currentUser", JSON.stringify({
-        email: user.email,
-        fullName: user.fullName || ""
-      }));
-      alert("Logged in successfully!");
+      localStorage.setItem("currentUser", JSON.stringify({ email: user.email }));
+      localStorage.setItem("currentUserUID", user.uid);
+      alert("Đăng nhập thành công!");
       location.href = "../index.html";
     } catch (error) {
-      alert("Error logging in: " + error.message);
+      alert("Lỗi khi đăng nhập: " + error.message);
     }
   });
 }
 
+// ====== Hàm thêm người dùng vào Firestore ======
+async function addUser(uid, name, email) {
+  try {
+    await setDoc(doc(db, "userList", uid), {
+      name: name,
+      email: email,
+      address: "Chưa cập nhật",
+      role: "Khách hàng"
+    });
+    console.log("Tạo user thành công với UID:", uid);
+  } catch (e) {
+    console.error("Lỗi khi thêm người dùng vào Firestore:", e);
+  }
+}
+
+// ====== Đăng nhập bằng Google ======
+const provider = new GoogleAuthProvider();
+const googleBtn = document.getElementById("google-login-btn");
+if (googleBtn) {
+  googleBtn.addEventListener("click", async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      localStorage.setItem("currentUser", JSON.stringify({ email: user.email }));
+      localStorage.setItem("currentUserUID", user.uid);
+
+      const userDocRef = doc(db, "userList", user.uid);
+      const userSnap = await getDoc(userDocRef);
+      if (!userSnap.exists()) {
+        await addUser(user.uid, user.displayName || "", user.email);
+      }
+
+      alert("Đăng nhập với Google thành công!");
+      location.href = "../index.html";
+    } catch (error) {
+      alert("Lỗi khi đăng nhập bằng Google: " + error.message);
+    }
+  });
+}
+
+// ====== Navbar cập nhật trạng thái người dùng ======
+document.addEventListener("DOMContentLoaded", () => {
+  const loginNavBtn = document.getElementById('login-button');
+  if (!loginNavBtn) return;
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      localStorage.setItem("currentUserUID", user.uid);
+      loginNavBtn.innerHTML = user.email || "Tài khoản";
+      loginNavBtn.onclick = () => window.location.href = "./html/profile.html";
+    } else {
+      loginNavBtn.innerHTML = "Đăng nhập";
+      loginNavBtn.onclick = () => {
+        if (location.href.endsWith('index.html')) {
+          window.location.href = "./html/login.html";
+        } else {
+          window.location.href = "./login.html";
+        }
+      };
+    }
+  });
+});
+// ====== Lấy danh sách danh mục sản phẩm từ Firestore ======
 async function loadCategoriesFromFirestore() {
   const querySnapshot = await getDocs(collection(db, "productList"));
   const categoriesSet = new Set();
@@ -64,11 +128,14 @@ async function loadCategoriesFromFirestore() {
     const product = doc.data();
     if (product.category) categoriesSet.add(product.category);
   });
+
   const categories = Array.from(categoriesSet);
   const container = document.getElementById('category-buttons');
   if (!container) return;
+
   container.innerHTML = '<button class="btn btn-success m-1" data-category="all">Tất cả</button>' +
     categories.map(cat => `<button class="btn btn-outline-success m-1" data-category="${cat}">${cat}</button>`).join('');
+
   container.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
       filterProducts(e.target.getAttribute('data-category'));
@@ -76,20 +143,8 @@ async function loadCategoriesFromFirestore() {
   });
 }
 
+// ====== Hiển thị sản phẩm ======
 let allProducts = [];
-
-function filterProducts(category) {
-  const productContainer = document.getElementById('productContainer');
-  const productElements = document.querySelectorAll('.products');
-
-  productElements.forEach(el => {
-    const productCategory = el.getAttribute('data-category');
-    const match = category === 'all' || productCategory === category;
-    el.classList.toggle('hidden', !match);
-  });
-
-  productContainer.append(productContainer);
-}
 
 async function displayProducts() {
   try {
@@ -119,79 +174,24 @@ async function displayProducts() {
       productContainer.appendChild(productElement);
     });
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.error("Lỗi khi tải sản phẩm:", error);
   }
 }
 
-function getSearchParam() {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('search')?.trim().toLowerCase() || '';
-}
-
-if (window.location.pathname.endsWith('shop.html')) {
-  await loadCategoriesFromFirestore();
-  await displayProducts();
-
-  const searchQuery = getSearchParam();
-  const input = document.getElementById("search-input");
-  if (input) input.value = searchQuery;
-  findProducts(searchQuery);
-}
-
-const provider = new GoogleAuthProvider();
-const googleBtn = document.getElementById("google-login-btn");
-if (googleBtn) {
-  googleBtn.addEventListener("click", () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        alert("Đăng nhập với Google thành công!");
-        location.href = "../index.html";
-      })
-      .catch((error) => {
-        alert("Lỗi khi đăng nhập: " + error.message);
-      });
+// ====== Lọc sản phẩm theo danh mục ======
+function filterProducts(category) {
+  const productElements = document.querySelectorAll('.products');
+  productElements.forEach(el => {
+    const productCategory = el.getAttribute('data-category');
+    const match = category === 'all' || productCategory === category;
+    el.classList.toggle('hidden', !match);
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const loginNavBtn = document.getElementById('login-button');
-  if (!loginNavBtn) return;
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      loginNavBtn.innerHTML = user.email || "Tài khoản";
-      loginNavBtn.onclick = () => window.location.href = "./html/profile.html";
-    } else {
-      loginNavBtn.innerHTML = "Đăng nhập";
-      if (location.href.endsWith('index.html')){
-        loginNavBtn.onclick = () => window.location.href = "./html/login.html";
-      } else {
-      loginNavBtn.onclick = () => window.location.href = "./login.html";
-      }
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const searchForm = document.getElementById("searchForm");
-  const searchInput = document.getElementById("search-input");
-
-  if (searchForm && searchInput) {
-    searchForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-      const query = searchInput.value.trim().toLowerCase();
-      if ( location.href.endsWith('index.html')) {
-        window.location.href = `html/shop.html${query ? `?search=${encodeURIComponent(query)}` : ''}`;
-      } else {
-        window.location.href = `shop.html${query ? `?search=${encodeURIComponent(query)}` : ''}`;
-      }
-    });
-  }
-});
-
+// ====== Xử lý tìm kiếm sản phẩm ======
 function findProducts(query) {
   const productElements = document.querySelectorAll('.products');
   const productContainer = document.getElementById('productContainer');
-
   const normalizedQuery = query.trim().toLowerCase();
   let found = false;
 
@@ -217,3 +217,37 @@ function findProducts(query) {
     productContainer.insertAdjacentHTML('beforeend', `<p class="no-result-message">Không tìm thấy sản phẩm nào.</p>`);
   }
 }
+
+// ====== Lấy từ khoá tìm kiếm từ URL ======
+function getSearchParam() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('search')?.trim().toLowerCase() || '';
+}
+
+// ====== Xử lý khi ở trang shop.html ======
+if (window.location.pathname.endsWith('shop.html')) {
+  document.addEventListener("DOMContentLoaded", async () => {
+    await loadCategoriesFromFirestore();
+    await displayProducts();
+
+    const searchQuery = getSearchParam();
+    const input = document.getElementById("search-input");
+    if (input) input.value = searchQuery;
+    findProducts(searchQuery);
+  });
+}
+
+// ====== Tìm kiếm bằng form ======
+document.addEventListener("DOMContentLoaded", function () {
+  const searchForm = document.getElementById("searchForm");
+  const searchInput = document.getElementById("search-input");
+
+  if (searchForm && searchInput) {
+    searchForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const query = searchInput.value.trim().toLowerCase();
+      const basePath = location.href.endsWith('index.html') ? 'html/shop.html' : 'shop.html';
+      window.location.href = `${basePath}${query ? `?search=${encodeURIComponent(query)}` : ''}`;
+    });
+  }
+});

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đánh giá sản phẩm</title>
+  <style>
+    .star-rating {
+      direction: rtl;
+      display: inline-flex;
+      font-size: 30px;
+    }
+    .star-rating input[type="radio"] {
+      display: none;
+    }
+    .star-rating label {
+      color: lightgray;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .star-rating input[type="radio"]:checked ~ label {
+      color: gold;
+    }
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+      color: orange;
+    }
+    #result {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Đánh giá sản phẩm:</h2>
+
+  <form id="ratingForm">
+    <div class="star-rating">
+      <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+      <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+      <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+      <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+      <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+    </div>
+  </form>
+
+  <div id="result">Bạn chưa đánh giá</div>
+
+  <script>
+    // Lấy tất cả input radio có tên là 'rating'
+    const ratingInputs = document.querySelectorAll('input[name="rating"]');
+    const resultDiv = document.getElementById('result');
+
+    // Gắn sự kiện thay đổi
+    ratingInputs.forEach(input => {
+      input.addEventListener('change', function() {
+        const selectedRating = this.value;
+        // Hiển thị kết quả
+        resultDiv.textContent = `Bạn đã đánh giá ${selectedRating} sao`;
+        // Lưu vào localStorage (có thể đổi sang gửi Firebase nếu muốn)
+        localStorage.setItem('userRating', selectedRating);
+      });
+    });
+
+    // Hiển thị lại nếu đã lưu trước đó
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedRating = localStorage.getItem('userRating');
+      if (savedRating) {
+        document.getElementById('star' + savedRating).checked = true;
+        resultDiv.textContent = `Bạn đã đánh giá ${savedRating} sao trước đó`;
+      }
+    });
+  </script>
+
+</body>
+</html>
