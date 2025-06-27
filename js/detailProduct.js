@@ -16,9 +16,27 @@ function getProductId() {
 
 async function showDetail() {
   const id = getProductId();
-  if (!id) return;
+  if (!id) {
+    console.error("Không tìm thấy ID sản phẩm trong URL.");
+    return;
+  }
 
-  const snap = await getDoc(doc(db, "productList", id));
+  let productRef;
+  try {
+    productRef = doc(db, "productList", id);
+  } catch (err) {
+    console.error("Lỗi khi tạo tham chiếu document:", err);
+    return;
+  }
+
+  let snap;
+  try {
+    snap = await getDoc(productRef);
+  } catch (err) {
+    console.error("Lỗi khi lấy dữ liệu sản phẩm:", err);
+    return;
+  }
+
   const container = document.getElementById("productDetailContainer");
   if (!snap.exists()) {
     container.innerHTML = "Không tìm thấy sản phẩm!";
